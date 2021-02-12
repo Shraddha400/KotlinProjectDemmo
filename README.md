@@ -1,5 +1,5 @@
 # KotlinProjectDemmo 
-#INTRODUCTIONS OF BRANCH (Whats inside the branches)
+#INTRODUCTIONS OF BRANCH (What's inside the branches)
 <H4> 1.> Master Branch contains Integration of Retrofit only with the open API "jsonplaceHolder" which is then Presented into a RecyclerView. <br/>
 2.> CoroutineRetrofit Branch contains Integration of Coroutine with Retrofit to call API "jsonplaceHolder" into the recycler view.<br/>
 3.> RxJava Branch contains Integration of RxJava with Retrofit to call API "jsonplaceHolder" into the recycler view.<br/>
