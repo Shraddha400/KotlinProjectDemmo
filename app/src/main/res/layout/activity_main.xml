@@ -6,16 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
+    <TextView
+        android:id="@+id/textFromFirebase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OBSERVE Here!"
+        android:textSize="18sp"
+        android:layout_marginTop="3dp"
+        android:drawableStart="@drawable/ic_baseline_account_circle_24"
+        android:drawablePadding="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="4dp"
+        android:layout_marginTop="35dp"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textFromFirebase"
         tools:listitem="@layout/item_view"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
