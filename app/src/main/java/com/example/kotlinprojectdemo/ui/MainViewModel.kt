@@ -8,6 +8,7 @@ import com.example.kotlinprojectdemo.model.CommentResponseItem
 import com.example.kotlinprojectdemo.network.MyAPI
 import com.example.kotlinprojectdemo.network.RetrofitBuilder
 import com.example.kotlinprojectdemo.repository.AppRepository
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -15,23 +16,20 @@ import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
 
-    private val ioDispacher: CoroutineDispatcher = Dispatchers.IO
+    private val disposable: CompositeDisposable = CompositeDisposable()
     private val myAPI: MyAPI = RetrofitBuilder.api
-    private val appRepository = AppRepository(ioDispacher, myAPI)
+    private val appRepository = AppRepository(myAPI, disposable)
 
-    private var _comments = MutableLiveData<List<CommentResponseItem>>()
-
-    val comments: LiveData<List<CommentResponseItem>> = _comments
-
-    fun getComments() {
-        viewModelScope.launch {
-            _comments.postValue(appRepository.getComment())
-        }
+    fun getComments(): LiveData<List<CommentResponseItem>> {
+        return appRepository.comments
     }
 
+    fun getCommentFromServer() {
+        appRepository.getComment()
+    }
 
     override fun onCleared() {
         super.onCleared()
-        ioDispacher.cancel()
+        disposable.clear()
     }
 }

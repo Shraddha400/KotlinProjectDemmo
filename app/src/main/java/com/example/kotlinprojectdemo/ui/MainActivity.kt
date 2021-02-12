@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        mainViewModel.comments.observe(this, { comments ->
+        mainViewModel.getComments().observe(this, { comments ->
             Log.d(TAG, "onCreate: $comments")
             val adapter = AdapterClass(comments)
             val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        mainViewModel.getComments()
+        mainViewModel.getCommentFromServer()
+        /** for observing Live data from server through view Model */
     }
 
 }
