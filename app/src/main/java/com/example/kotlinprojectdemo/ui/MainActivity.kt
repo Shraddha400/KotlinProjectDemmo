@@ -3,12 +3,10 @@ package com.example.kotlinprojectdemo.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinprojectdemo.R
-import com.example.kotlinprojectdemo.data.CommentResponseItem
 import com.example.kotlinprojectdemo.model.AdapterClass
 import com.example.kotlinprojectdemo.model.MainViewModel
 
