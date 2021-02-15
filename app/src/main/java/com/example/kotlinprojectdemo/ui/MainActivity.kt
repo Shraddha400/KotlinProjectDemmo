@@ -14,27 +14,23 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-
 class MainActivity : AppCompatActivity() {
     private val TAG = MainActivity::class.java.canonicalName
-
     private lateinit var mainViewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         FirebaseApp.initializeApp(this)
         Log.d(TAG, "onCreate: ${Thread.currentThread().name}")
-        
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-        mainViewModel.getComments().observe(this, { comments ->
+        mainViewModel.comments.observe(this) { comments ->
             Log.d(TAG, "onCreate: $comments")
             val adapter = AdapterClass(comments)
             val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(baseContext)
             recyclerView.setHasFixedSize(true)
-        })
+        }
         val tutorialDocuments = Firebase.firestore.collection("coroutineFirebase").document("postId")
         val test = Test("SHRADDHA")
         GlobalScope.launch(Dispatchers.IO) {
@@ -47,14 +43,11 @@ class MainActivity : AppCompatActivity() {
                 itemText.text = person.toString()
             }
         }
-
     }
-
-
     override fun onResume() {
         super.onResume()
-        mainViewModel.getCommentFromServer()
+        mainViewModel.getComments()
+
         /** for observing Live data from server through view Model */
     }
-
 }
